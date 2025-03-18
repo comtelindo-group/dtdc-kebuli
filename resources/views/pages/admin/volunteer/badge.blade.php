@@ -1,18 +1,14 @@
 @switch($status)
-    @case('memilih')
-        <span class="badge badge-success">Memilih</span>
+    @case('Tertarik dengan produk')
+        <span class="badge badge-success">Tertarik dengan produk</span>
     @break
 
-    @case('relawan')
-        <span class="badge badge-info">Relawan</span>
+    @case('Hanya taruh brosur')
+        <span class="badge badge-warning">Hanya taruh brosur</span>
     @break
 
-    @case('ragu')
-        <span class="badge badge-warning">Ragu</span>
-    @break
-
-    @case('tidak_memilih')
-        <span class="badge badge-danger">Tidak memilih</span>
+    @case('Tidak tertarik')
+        <span class="badge badge-danger">Tidak tertarik</span>
     @break
 
     @default

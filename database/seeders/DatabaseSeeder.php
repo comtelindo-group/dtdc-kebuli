@@ -37,12 +37,12 @@ class DatabaseSeeder extends Seeder
     {
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'relawan']);
-        Role::create(['name' => 'saksi']);
+        Role::create(['name' => 'surveyor']);
 
         User::create([
             'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('03kf1l2gjjw'),
+            'email' => 'superadmin@gmail.com',
+            'password' => bcrypt('12345678'),
         ])->assignRole('admin');
 
         // for ($i = 1; $i <= 30; $i++) {

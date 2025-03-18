@@ -66,7 +66,7 @@
             <thead>
                 <tr class="fw-bold fs-7 text-gray-500 text-uppercase border-bottom-2">
                     <th class="w-50px text-center">NO</th>
-                    <th>SURVEYOR</th>
+                    {{-- <th>SURVEYOR</th> --}}
                     <th>NAMA</th>
                     <th>NOMOR HP</th>
                     <th>KELURAHAN</th>
@@ -152,11 +152,7 @@
                         orderable: false,
                         searchable: false
                     },
-                    {
-                        data: 'user',
-                        orderable: false,
-                        searchable: true
-                    },
+
                     {
                         data: 'name',
                         orderable: false,

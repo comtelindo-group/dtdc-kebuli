@@ -98,7 +98,7 @@ class VolunteerController extends Controller
 
     public function getDatatable()
     {
-        $query = Volunteer::where("user_id", auth()->id());
+        $query = Volunteer::get();
 
         return DataTables::of($query)
             ->addIndexColumn()

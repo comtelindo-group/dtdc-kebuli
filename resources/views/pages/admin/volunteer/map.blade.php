@@ -94,13 +94,12 @@
         <h4>Informasi Map</h4>
         <div id="filters">
             <input type="checkbox" id="green" checked> <span class="legend-color"
-                style="background-color: green;"></span> Memilih<br>
+                style="background-color: green;"></span> Tertarik dengan produk<br>
             <input type="checkbox" id="yellow" checked> <span class="legend-color"
-                style="background-color: yellow;"></span> Ragu<br>
+                style="background-color: yellow;"></span> Hanya taruh brosur<br>
             <input type="checkbox" id="red" checked> <span class="legend-color"
-                style="background-color: red;"></span> Tidak Memilih<br>
+                style="background-color: red;"></span> Tidak tertarik<br>
             <input type="checkbox" id="blue" checked> <span class="legend-color"
-                style="background-color: blue;"></span> Relawan<br>
         </div>
     </div>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
@@ -143,27 +142,23 @@
 
         function getColor(status) {
             switch (status) {
-                case 'memilih':
+                case 'Tertarik dengan produk':
                     return greenMarker;
-                case 'ragu':
+                case 'Hanya taruh brosur':
                     return yellowMarker;
-                case 'tidak_memilih':
+                case 'Tidak tertarik':
                     return redMarker;
-                case 'relawan':
-                    return blueMarker;
             }
         }
 
         function getTag(status) {
             switch (status) {
-                case 'memilih':
-                    return 'Memilih';
-                case 'ragu':
-                    return 'Ragu-ragu';
-                case 'tidak_memilih':
-                    return 'Tidak Memilih';
-                case 'relawan':
-                    return 'Relawan';
+                case 'Tertarik dengan produk':
+                    return 'Tertarik dengan produk';
+                case 'Hanya taruh brosur':
+                    return 'Hanya taruh brosur';
+                case 'Tidak tertarik':
+                    return 'Tidak tertarik';
             }
         }
 
@@ -227,26 +222,23 @@
                 var marker = L.marker([{{ $volunteer->latitude }}, {{ $volunteer->longitude }}], {
                     icon: getColor(status)
                 }).bindPopup(
-                    "<b>RT {{ $volunteer->rt }}, No. {{ $houseNumber }}</b><br>Kepala Keluarga: {{ $volunteer->families()->first()->name ?? '-' }}"
+                    "<b>RT {{ $volunteer->rt }}, No. {{ $houseNumber }}</b><br>Nama: {{ $volunteer->name ?? '-' }}"
                 ).bindTooltip(
-                    "{{ $volunteer->families()->first()->name ?? 'Unknown' }}", {
+                    "{{ $volunteer->name ?? 'Unknown' }}", {
                         permanent: false
                     }
                 );
 
                 // Add markers to corresponding clusters based on status
                 switch (status) {
-                    case 'memilih':
+                    case 'Tertarik dengan produk':
                         greenCluster.addLayer(marker);
                         break;
-                    case 'ragu':
+                    case 'Hanya taruh brosur':
                         yellowCluster.addLayer(marker);
                         break;
-                    case 'tidak_memilih':
+                    case 'Tidak tertarik':
                         redCluster.addLayer(marker);
-                        break;
-                    case 'relawan':
-                        blueCluster.addLayer(marker);
                         break;
                 }
             @endforeach

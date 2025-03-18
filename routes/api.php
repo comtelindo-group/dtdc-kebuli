@@ -38,7 +38,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('logout', 'logout');
     });
 
-    Route::middleware('role:saksi')->group(function () {
+    Route::middleware('role:surveyor')->group(function () {
         Route::prefix('report')->group(function () {
             Route::controller(TpsReportController::class)->group(function () {
                 Route::get('get', 'get');

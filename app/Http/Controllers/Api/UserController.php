@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Constant;
 use App\Http\Controllers\Controller;
-use App\Models\Tps;
-use App\Models\TpsReport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,7 +38,6 @@ class UserController extends Controller
             [
                 'name' => 'required|string|unique:users',
                 'email' => 'required|email|unique:users',
-                'tps_id' => 'required|exists:tps,id',
                 'password' => 'required',
             ],
             [
@@ -52,9 +49,6 @@ class UserController extends Controller
                 'email.email' => 'Email harus berupa email valid',
                 'email.unique' => 'Email sudah terdaftar',
 
-                'tps_id.required' => 'Tps harus diisi',
-                'tps_id.exists' => 'Tps tidak ditemukan',
-
                 'password.required' => 'Password harus diisi',
             ]
         );
@@ -65,22 +59,9 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'tps_id' => $request->tps_id,
         ]);
 
-        $user->assignRole('saksi');
-
-        TpsReport::create([
-            'type' => Constant::TPS_REPORT_TYPE["walikota"],
-            'tps_id' => $request->tps_id,
-            'user_id' => $user->id,
-        ]);
-
-        TpsReport::create([
-            'type' => Constant::TPS_REPORT_TYPE["gubernur"],
-            'tps_id' => $request->tps_id,
-            'user_id' => $user->id,
-        ]);
+        $user->assignRole('surveyor');
 
         DB::commit();
 
@@ -98,7 +79,6 @@ class UserController extends Controller
                 'id' => 'required',
                 'name' => 'required|string|unique:users,name,' . $request->id,
                 'email' => 'required|email|unique:users,email,' . $request->id,
-                'tps_id' => 'required|exists:tps,id',
                 'password' => 'nullable|min:8',
             ],
             [
@@ -109,9 +89,6 @@ class UserController extends Controller
                 'email.required' => 'Email harus diisi',
                 'email.email' => 'Email harus berupa email valid',
                 'email.unique' => 'Email sudah terdaftar',
-
-                'tps_id.required' => 'Tps harus diisi',
-                'tps_id.exists' => 'Tps tidak ditemukan',
 
                 'password.min' => 'Password minimal 8 karakter',
             ]
@@ -134,7 +111,6 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'tps_id' => $request->tps_id,
         ]);
 
         DB::commit();

@@ -28,7 +28,7 @@ class VolunteerController extends Controller
 
     public function map()
     {
-        $volunteers = Volunteer::with('families')->get();
+        $volunteers = Volunteer::get();
 
         return view('pages.admin.volunteer.map', compact('volunteers'));
     }
@@ -82,17 +82,8 @@ class VolunteerController extends Controller
 
         return DataTables::of($query)
             ->addIndexColumn()
-            ->addColumn('user', function ($query) {
-                return $query->user->name;
-            })
-            ->addColumn('name', function ($query) {
-                return $query->families()->first()->name ?? "-";
-            })
             ->addColumn('created_at', function ($query) {
-                return Carbon::parse($query->created_at)->format('d-m-Y');
-            })
-            ->addColumn('phone_number', function ($query) {
-                return $query->families()->first()->phone_number ?? "-";
+                return Carbon::parse($query->created_at)->format('d-m-Y H:i');
             })
             ->addColumn('status', function ($query) {
                 $status = $query->status;
