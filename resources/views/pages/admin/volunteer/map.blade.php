@@ -96,9 +96,9 @@
             <input type="checkbox" id="green" checked> <span class="legend-color"
                 style="background-color: green;"></span> Tertarik dengan produk<br>
             <input type="checkbox" id="yellow" checked> <span class="legend-color"
-                style="background-color: yellow;"></span> Hanya taruh brosur<br>
+                style="background-color: yellow;"></span> Tidak tertarik<br>
             <input type="checkbox" id="red" checked> <span class="legend-color"
-                style="background-color: red;"></span> Tidak tertarik<br>
+                style="background-color: red;"></span> Hanya taruh brosur<br>
         </div>
     </div>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
