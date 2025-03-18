@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Constant;
 use App\Models\Volunteer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -105,6 +106,9 @@ class VolunteerController extends Controller
             ->addColumn('status', function ($query) {
                 $status = $query->status;
                 return view('pages.admin.volunteer.badge', compact('status'));
+            })
+            ->addColumn('created_at', function ($query) {
+                return Carbon::parse($query->created_at)->format('d-m-Y H:i');
             })
             ->rawColumns(['status'])
             ->addIndexColumn()
