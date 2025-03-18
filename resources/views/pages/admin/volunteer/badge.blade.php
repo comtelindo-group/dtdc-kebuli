@@ -4,11 +4,11 @@
     @break
 
     @case('Hanya taruh brosur')
-        <span class="badge badge-warning">Hanya taruh brosur</span>
+        <span class="badge badge-danger">Hanya taruh brosur</span>
     @break
 
     @case('Tidak tertarik')
-        <span class="badge badge-danger">Tidak tertarik</span>
+        <span class="badge badge-warning">Tidak tertarik</span>
     @break
 
     @default

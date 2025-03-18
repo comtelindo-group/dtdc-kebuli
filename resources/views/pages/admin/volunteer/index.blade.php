@@ -39,10 +39,9 @@
             <div class="col-lg-4 mb-4">
                 <select name="status" class="form-select form-select-solid" id="user" data-control="select2">
                     <option value="*" selected>Semua Status</option>
-                    <option value="relawan">Relawan</option>
-                    <option value="memilih">Memilih</option>
-                    <option value="ragu">Ragu</option>
-                    <option value="tidak_memilih">Tidak memilih</option>
+                    <option value="Tertarik dengan produk">Tertarik dengan produk</option>
+                    <option value="Hanya taruh brosur">Hanya taruh brosur</option>
+                    <option value="Tidak tertarik">Tidak tertarik</option>
                 </select>
             </div>
         </div>

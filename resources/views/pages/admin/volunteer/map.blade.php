@@ -99,22 +99,12 @@
                 style="background-color: yellow;"></span> Hanya taruh brosur<br>
             <input type="checkbox" id="red" checked> <span class="legend-color"
                 style="background-color: red;"></span> Tidak tertarik<br>
-            <input type="checkbox" id="blue" checked> <span class="legend-color"
         </div>
     </div>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
     <script>
         var redMarker = L.icon({
             iconUrl: '{{ asset('assets/plugins/custom/leaflet/images/leaflet/marker-icon-red.png') }}',
-            iconSize: [23, 35],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41],
-            shadowAnchor: [12, 41]
-        });
-
-        var blueMarker = L.icon({
-            iconUrl: '{{ asset('assets/plugins/custom/leaflet/images/leaflet/marker-icon-blue.png') }}',
             iconSize: [23, 35],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
@@ -180,16 +170,7 @@
                     });
                 }
             });
-            var blueCluster = L.markerClusterGroup({
-                iconCreateFunction: function(cluster) {
-                    return L.divIcon({
-                        html: '<div style="background-color:rgba(0,0,255,0.6);width:40px;height:40px;border-radius:50%;line-height:40px;text-align:center;color:white;">' +
-                            cluster.getChildCount() + '</div>',
-                        className: 'custom-cluster',
-                        iconSize: [40, 40]
-                    });
-                }
-            });
+
             var greenCluster = L.markerClusterGroup({
                 iconCreateFunction: function(cluster) {
                     return L.divIcon({
@@ -235,17 +216,16 @@
                         greenCluster.addLayer(marker);
                         break;
                     case 'Hanya taruh brosur':
-                        yellowCluster.addLayer(marker);
+                        redCluster.addLayer(marker);
                         break;
                     case 'Tidak tertarik':
-                        redCluster.addLayer(marker);
+                        yellowCluster.addLayer(marker);
                         break;
                 }
             @endforeach
 
             // Add clusters to map
             map.addLayer(redCluster);
-            map.addLayer(blueCluster);
             map.addLayer(greenCluster);
             map.addLayer(yellowCluster);
 
@@ -253,8 +233,6 @@
             function updateMarkers() {
                 if ($('#red').is(':checked')) map.addLayer(redCluster);
                 else map.removeLayer(redCluster);
-                if ($('#blue').is(':checked')) map.addLayer(blueCluster);
-                else map.removeLayer(blueCluster);
                 if ($('#green').is(':checked')) map.addLayer(greenCluster);
                 else map.removeLayer(greenCluster);
                 if ($('#yellow').is(':checked')) map.addLayer(yellowCluster);
