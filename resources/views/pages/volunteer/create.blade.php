@@ -45,9 +45,9 @@
                 </div>
 
                 <div class="mb-3 d-flex flex-column gap-2 px-4">
-                    <label for="name" class="required">Nomor Rumah</label>
+                    <label for="name">Nomor Rumah</label>
                     <input type="text" autocomplete="off" name="house_number"
-                        class="form-control form-control-solid border" id="name" required>
+                        class="form-control form-control-solid border" id="name" >
                 </div>
 
                 <div class="mb-3 d-flex flex-column gap-2 px-4">
