@@ -27,15 +27,15 @@
                 <input type="text" name="longitude" hidden>
 
                 <div class="mb-3 d-flex flex-column gap-2 px-4">
-                    <label for="name" class="required">Nama</label>
+                    <label for="name" class=">Nama</label>
                     <input type="text" autocomplete="off" name="name" class="form-control form-control-solid border"
-                        id="name" required>
+                        id="name">
                 </div>
 
                 <div class="mb-3 d-flex flex-column gap-2 px-4">
-                    <label for="phone_number" class="required">Nomor WA</label>
+                    <label for="phone_number" class=">Nomor WA</label>
                     <input type="text" autocomplete="off" name="phone_number" class="form-control form-control-solid border"
-                        id="phone_number" required>
+                        id="phone_number">
                 </div>
 
                 <div class="mb-3 d-flex flex-column gap-2 px-4">
