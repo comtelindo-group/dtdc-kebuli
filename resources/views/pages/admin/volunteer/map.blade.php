@@ -135,9 +135,9 @@
                 case 'Tertarik dengan produk':
                     return greenMarker;
                 case 'Hanya taruh brosur':
-                    return yellowMarker;
-                case 'Tidak tertarik':
                     return redMarker;
+                case 'Tidak tertarik':
+                    return yellowMarker;
             }
         }
 
