@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Constant;
 use App\Exports\ExportVolunteer;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -18,11 +19,19 @@ class VolunteerController extends Controller
     {
         $users = User::whereNot('id', auth()->id())->get();
         $kelurahan = ['Lamaru', 'Manggar', 'Manggar Baru', 'Teritip', 'Baru Ilir', 'Baru Tengah', 'Baru Ulu', 'Kariangau', 'Margasari', 'Margo Mulyo', 'Batu Ampar', 'Graha Indah', 'Gunung Samarinda', 'Gunung Samarinda Baru', 'Karang Joang', 'Muara Rapak', 'Gunung Sari Ilir', 'Gunung Sari Ulu', 'Karang Jati', 'Karang Rejo', 'Mekar Sari', 'Sumber Rejo', 'Damai Bahagia', 'Damai Baru', 'Gunung Bahagia', 'Sepinggan', 'Sepinggan Baru', 'Sepinggan Raya', 'Sungai Nangka', 'Damai', 'Klandasan Ilir', 'Klandasan Ulu', 'Prapatan', 'Telaga Sari'];
+        $all = Volunteer::count();
+        $interest = Volunteer::where('status', Constant::VOLUNTEERS_STATUS['Tertarik dengan produk'])->count();
+        $notInterest = Volunteer::where('status', Constant::VOLUNTEERS_STATUS["Tidak tertarik"])->count();
+        $other = Volunteer::where('status', Constant::VOLUNTEERS_STATUS["Hanya taruh brosur"])->count();
 
 
         return view('pages.admin.volunteer.index', compact([
             'users',
-            'kelurahan'
+            'kelurahan',
+            'all',
+            'interest',
+            'notInterest',
+            'other',
         ]));
     }
 
