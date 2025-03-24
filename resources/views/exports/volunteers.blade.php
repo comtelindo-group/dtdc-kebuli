@@ -49,7 +49,7 @@
                     {{ \Carbon\Carbon::parse($d->created_at)->addHours(8)->format('d F Y') }}
                 </td>
                 <td>
-                    {{ $d->user->name }}
+                    {{ $d->user->name ?? "" }}
                 </td>
                 <td>
                     {{ $d->name }}
