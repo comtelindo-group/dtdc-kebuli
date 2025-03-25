@@ -14,6 +14,7 @@
 
 @section('content')
   {{-- statistik dashboard --}}
+  @include('pages.admin.volunteer.component.modal-image')
   <div class="container-fluid">
     <div class="header-body">
       <div class="row">
