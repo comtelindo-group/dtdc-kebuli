@@ -120,10 +120,10 @@ class VolunteerController extends Controller
 
         $all = $query->count();
         $other = $query;
-        $other = $other->where('status', Constant::VOLUNTEERS_STATUS["Hanya taruh brosur"])->count();
         $interest = $query;
-        $interest = $interest->where('status', Constant::VOLUNTEERS_STATUS['Tertarik dengan produk'])->count();
         $notInterest = $query;
+        $other = $other->where('status', Constant::VOLUNTEERS_STATUS["Hanya taruh brosur"])->count();
+        $interest = $interest->where('status', Constant::VOLUNTEERS_STATUS['Tertarik dengan produk'])->count();
         $notInterest = $notInterest->where('status', Constant::VOLUNTEERS_STATUS["Tidak tertarik"])->count();
 
         return response()->json([
