@@ -105,4 +105,29 @@ class VolunteerController extends Controller
             ->addIndexColumn()
             ->make(true);
     }
+
+    public function getStatistic(Request $request)
+    {
+        $query = Volunteer::query();
+
+        if ($request->user_id != '*') {
+            $query->where('user_id', $request->user_id);
+        }
+
+        if ($request->kelurahan) {
+            $query->whereIn('kelurahan', $request->kelurahan);
+        }
+
+        $all = $query->count();
+        $interest = $query->where('status', Constant::VOLUNTEERS_STATUS['Tertarik dengan produk'])->count();
+        $notInterest = $query->where('status', Constant::VOLUNTEERS_STATUS["Tidak tertarik"])->count();
+        $other = $query->where('status', Constant::VOLUNTEERS_STATUS["Hanya taruh brosur"])->count();
+
+        return response()->json([
+            'all' => $all,
+            'interest' => $interest,
+            'notInterest' => $notInterest,
+            'other' => $other,
+        ]);
+    }
 }

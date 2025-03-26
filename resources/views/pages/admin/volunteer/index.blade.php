@@ -24,7 +24,7 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Total Volunteer</h5>
-                  <span class="h2 mb-0">{{$all}} Orang</span>
+                  <span class="h2 mb-0" id="all">{{$all}} Orang</span>
                 </div>
               </div>
             </div>
@@ -36,7 +36,7 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Tertarik</h5>
-                  <span class="h2 mb-0">{{$interest}} Orang</span>
+                  <span class="h2 mb-0" id="interest">{{$interest}} Orang</span>
                 </div>
               </div>
             </div>
@@ -48,7 +48,7 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Tidak tertarik</h5>
-                  <span class="h2 mb-0">{{$notInterest}} Orang</span>
+                  <span class="h2 mb-0" id="notInterest">{{$notInterest}} Orang</span>
                 </div>
               </div>
             </div>
@@ -60,7 +60,7 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Taruh brosur</h5>
-                  <span class="h2 mb-0">{{$other}} Orang</span>
+                  <span class="h2 mb-0" id="other">{{$other}} Orang</span>
                 </div>
               </div>
             </div>
@@ -253,6 +253,33 @@
 
       $('#btn-search').on('click', function() {
         $('#table').DataTable().ajax.reload();
+
+        $.ajax({
+          url: "{{ route('admin.volunteer.statistic') }}",
+          type: 'POST',
+          data: {
+            user_id: $('[name="user_id"]').val(),
+            status: $('[name="status"]').val(),
+            kelurahan: $('[name="kelurahan[]"]').val()
+          },
+          headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+          },
+          success: function(data) {
+            $('#all').text(data.all + " Orang");
+            $('#interest').text(data.interest + " Orang");
+            $('#notInterest').text(data.notInterest + " Orang");
+            $('#other').text(data.other + " Orang");
+          },
+          error: function(xhr, status, error) {
+            const data = xhr.responseJSON;
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: data.message,
+            });
+          }
+        });
       });
     });
   </script>
